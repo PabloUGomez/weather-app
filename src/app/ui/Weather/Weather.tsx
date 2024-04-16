@@ -1,15 +1,20 @@
 import Image from 'next/image'
 import { weather } from '../../../scripts/placeholder'
+import listByHour from './listByHour'
 
 export function Weather() {
-  const { location, current } = weather
+
+  const { location, current, forecast } = weather
+  const time = current.is_day === 1 ? 'day' : 'night'
+  const localTime = location.localtime.split(' ')[1].split(':')[0]
   const currentWeather = {
     name: location.name,
     country: location.country,
+    isDay: time,
     temp_c: current.temp_c,
     temp_f: current.temp_f,
     condition: current.condition.text,
-    icon: current.condition.icon.split('/').slice(-1)[0],
+    icon: current.condition.icon.split('/').slice(-1)[0].split('.')[0],
     wind_kph: current.wind_kph,
     wind_mph: current.wind_mph,
     wind_dir: current.wind_dir,
@@ -24,34 +29,44 @@ export function Weather() {
     precip_mm: current.precip_mm,
     precip_in: current.precip_in,
   }
-  console.log(currentWeather)
+  const hours  = forecast.forecastday[0].hour
   return (
     <section className='flex flex-col h-full'>
-      <form action=''>
-        <input
-          className='bg-gray-700 w-full rounded-2xl p-3'
-          type='text'
-          placeholder='Search cities'
-        />
-      </form>
-      <div className='flex flex-row justify-between mx-20 my-12'>
-        <span className='flex flex-col justify-between'>
-          <h1 className='text-4xl font-semibold'>
-            {currentWeather.name}{' '}
-            <span className='text-xs font-light'>{currentWeather.country}</span>
-          </h1>
-          <h2 className='text-6xl font-bold'>{currentWeather.temp_c}°C</h2>
-        </span>
-
-        <picture>
-          <img
-            src={`/images/day/143.svg`}
-            alt='weather icon'
-            width={200}
-            height={200}
+      <article>
+        <form action=''>
+          <input
+            className='bg-gray-800 w-full rounded-2xl p-3'
+            type='text'
+            placeholder='Search cities'
           />
-        </picture>
-      </div>
+        </form>
+        <div className='flex flex-row justify-between mx-4 xl:mx-20 lg:mx-10 my-10 '>
+          <span className='flex flex-col gap-y-10 mt-10'>
+            <h1 className='text-6xl font-bold'>
+              {currentWeather.name}{' '}
+              <span className='text-xs font-light hidden xl:inline-flex'>
+                {currentWeather.country}
+              </span>
+            </h1>
+            <h2 className='text-6xl font-bold'>{currentWeather.temp_c}°</h2>
+          </span>
+          <Image
+            src={`/images/${currentWeather.isDay}/${currentWeather.icon}.svg`}
+            alt='weather icon'
+            width={220}
+            height={220}
+            priority
+          />
+        </div>
+      </article>
+      <article className='bg-gray-800 w-full rounded-2xl p-6 flex flex-col'>
+        <h3 className='uppercase font-semibold text-sm text-white/80'>Today forecast</h3>
+        <ul>
+          {
+            hours.map((hour) => listByHour(hour))
+          }
+        </ul>
+      </article>
     </section>
   )
 }

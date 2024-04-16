@@ -5,7 +5,7 @@ import WeatherIcon from '../icons/weather'
 
 export default function Aside() {
   return (
-    <aside className='bg-gray-700 rounded-2xl flex flex-col w-28 p-4 h-full'>
+    <aside className='bg-gray-800 rounded-2xl flex flex-col w-28 p-4 h-full'>
       <Link href='/' className='mb-20 p-2 hover:bg-gray-400/40 rounded-xl'>
         <picture>
           <img src='/logo.png' alt='Logo weather app' />
