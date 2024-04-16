@@ -3,7 +3,6 @@ import { weather } from '../../../scripts/placeholder'
 import listByHour from './listByHour'
 
 export function Weather() {
-
   const { location, current, forecast } = weather
   const time = current.is_day === 1 ? 'day' : 'night'
   const localTime = location.localtime.split(' ')[1].split(':')[0]
@@ -29,7 +28,10 @@ export function Weather() {
     precip_mm: current.precip_mm,
     precip_in: current.precip_in,
   }
-  const hours  = forecast.forecastday[0].hour
+  const hours = forecast.forecastday[0].hour.slice(
+    Number(localTime),
+    Number(localTime) + 6
+  )
   return (
     <section className='flex flex-col h-full'>
       <article>
@@ -40,14 +42,17 @@ export function Weather() {
             placeholder='Search cities'
           />
         </form>
-        <div className='flex flex-row justify-between mx-4 xl:mx-20 lg:mx-10 my-10 '>
+        <div className='flex flex-row justify-between mx-4 xl:mx-20 lg:mx-10 mb-10'>
           <span className='flex flex-col gap-y-10 mt-10'>
-            <h1 className='text-6xl font-bold'>
-              {currentWeather.name}{' '}
-              <span className='text-xs font-light hidden xl:inline-flex'>
-                {currentWeather.country}
-              </span>
-            </h1>
+            <span>
+              <h2 className='text-6xl font-bold'>
+                {currentWeather.name}{' '}
+                <span className='text-xs font-light hidden xl:inline-flex'>
+                  {currentWeather.country}
+                </span>
+              </h2>
+              <p className='mt-2 text-white/50'>{currentWeather.condition}</p>
+            </span>
             <h2 className='text-6xl font-bold'>{currentWeather.temp_c}°</h2>
           </span>
           <Image
@@ -59,12 +64,12 @@ export function Weather() {
           />
         </div>
       </article>
-      <article className='bg-gray-800 w-full rounded-2xl p-6 flex flex-col'>
-        <h3 className='uppercase font-semibold text-sm text-white/80'>Today forecast</h3>
-        <ul>
-          {
-            hours.map((hour) => listByHour(hour))
-          }
+      <article className='bg-gray-800 w-full rounded-2xl p-6 flex flex-col h-56'>
+        <h3 className='uppercase font-semibold text-sm text-white/80'>
+          Today forecast
+        </h3>
+        <ul className='flex flex-row justify-between mt-4 mx-6 h-full'>
+          {hours.map((hour,index) => listByHour(hour,index))}
         </ul>
       </article>
     </section>
