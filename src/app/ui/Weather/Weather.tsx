@@ -64,7 +64,7 @@ export function Weather() {
           />
         </div>
       </article>
-      <article className='bg-gray-800 w-full rounded-2xl p-6 flex flex-col h-56'>
+      <article className='bg-gray-800 w-full rounded-2xl p-2 md:p-6 flex flex-col h-56'>
         <h3 className='uppercase font-semibold text-sm text-white/80'>
           Today forecast
         </h3>

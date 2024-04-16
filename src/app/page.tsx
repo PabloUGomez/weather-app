@@ -17,8 +17,7 @@ export default function Home() {
           <Weather />
           <SideWeather />
         </div>
-      </main>{' '}
-      <style></style>
+      </main>
     </>
   )
 }
