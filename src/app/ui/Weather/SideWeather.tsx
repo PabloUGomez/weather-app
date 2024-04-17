@@ -9,7 +9,7 @@ type days = {
   img: string
   date: string
 }
-function listByDay(day: days, index: number) {
+function listByDay(day: days, index: number, imageSize: number) {
   const { maxtemp_c, maxtemp_f, mintemp_c, mintemp_f, condition, img, date } =
     day
   const nameOfDay = new Date(date).toLocaleDateString('en-US', {
@@ -26,8 +26,8 @@ function listByDay(day: days, index: number) {
           <img
             src={`/images/day/${img}.svg`}
             alt='weather icon'
-            width={70}
-            height={70}
+            width={imageSize}
+            height={imageSize}
           />
           <h5 className='text-xs font-light text-pretty w-16'>{condition}</h5>
         </picture>
@@ -39,7 +39,7 @@ function listByDay(day: days, index: number) {
   )
 }
 
-export const SideWeather = () => {
+export const SideWeather = (imageSize : {imageSize : number}) => {
   const days = forecast7Days.forecast.forecastday
   return (
     <div className='bg-gray-800 rounded-2xl flex flex-col p-4 h-full'>
@@ -50,7 +50,7 @@ export const SideWeather = () => {
         {days.map((day, index) => {
           const { maxtemp_c, maxtemp_f, mintemp_c, mintemp_f, condition } =
             day.day
-          const currentDay = {
+          const currentDay = {  
             maxtemp_c: maxtemp_c,
             maxtemp_f: maxtemp_f,
             mintemp_c: mintemp_c,
@@ -59,7 +59,7 @@ export const SideWeather = () => {
             img: condition.icon.split('/').slice(-1)[0].split('.')[0],
             date: day.date,
           } as days
-          return listByDay(currentDay as days, index)
+          return listByDay(currentDay as days, index , imageSize.imageSize)
         })}{' '}
       </ul>
     </div>

@@ -15,7 +15,7 @@ export default function Home() {
           }}
         >
           <Weather />
-          <SideWeather />
+          <SideWeather imageSize={70}/>
         </div>
       </main>
     </>

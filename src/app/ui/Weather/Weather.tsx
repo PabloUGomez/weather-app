@@ -58,7 +58,7 @@ export const dataAirConditions = {
 } as airConditions
 export function Weather() {
   return (
-    <section className='flex flex-col h-full'>
+    <section className='flex flex-col h-full gap-y-5'>
       {currentWeather(mainWeather as mainWeather)}
       {todayForecast(hours)}
       {airConditions(dataAirConditions as airConditions)}
