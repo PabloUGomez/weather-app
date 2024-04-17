@@ -1,8 +1,10 @@
 import { type hours } from '../../../scripts/placeholder'
+import { useId } from 'react'
 
-export default function listByHour(hour: hours, index: number) {
+export default function ListByHour(hour: hours, index: number,lenght : number) {
+  const id = useId()
   return (
-    <li key={index} className='flex gap-y-2 justify-around items-center w-full'>
+    <li key={id} className={`flex gap-y-2 items-center w-full ${index === lenght ? 'justify-start' : 'justify-around'}`}>
       <span className='flex flex-col justify-between items-center h-full'>
         <h4 className='text-md text-white/80 font-semibold'>
           {hour.time.split(' ')[1]}
@@ -13,13 +15,13 @@ export default function listByHour(hour: hours, index: number) {
               hour.condition.icon.split('/').slice(-1)[0].split('.')[0]
             }.svg`}
             alt='weather icon'
-            width={80}
-            height={80}
+            width={60}
+            height={60}
           />
         </picture>
         <h4 className='text-md font-bold text-white/80'>{hour.temp_c}°</h4>
       </span>
-      {index != 5 && <span className='w-[2px] h-full bg-gray-400/20 rounded-lg'></span>}
+      {index != lenght && <span className='w-[2px] h-full bg-gray-400/20 rounded-lg'></span>}
     </li>
   )
 }
