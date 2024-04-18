@@ -1,11 +1,11 @@
 'use client'
 
-import { url } from 'inspector'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { ChangeEvent } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 export default function SearchPage() {
+  const input = document.getElementById('search') as HTMLInputElement
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
@@ -20,6 +20,14 @@ export default function SearchPage() {
     },
     400
   )
+  if (input) {
+    if (pathname === '/Weather') {
+      if (input.value != '') {
+        input.value = ''
+      }
+    }
+  }
+
   return (
     <form action=''>
       <input

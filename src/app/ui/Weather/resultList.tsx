@@ -1,5 +1,5 @@
 'use client'
-import { usePathname, useSearchParams, useRouter } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { useId } from 'react'
 
 export default function ResultList({
@@ -8,23 +8,23 @@ export default function ResultList({
   data: {
     name: string
     country: string
+    url: string
   }[]
 }) {
   const searchParams = useSearchParams()
-  const pathname = usePathname()
   const { replace } = useRouter()
   const id = useId()
 return (
     <div className={`bg-gray-800 rounded-lg m-1 p-3 absolute z-10 top-16 gap-y-2 ${data[0] ? 'block' : 'hidden'}`}>
-        {data.map((item: { name: string; country: string }, index: number) => { // Add 'index' parameter
-            const { name, country } = item;
+        {data.map((item: { name: string; country: string; url : string }, index: number) => { // Add 'index' parameter
+            const { name, country, url } = item;
             const handleClick = () => {
                 const ul = document.querySelector('ul');
                 if (ul) {
                     ul.remove();
                 }
                 const params = new URLSearchParams(searchParams);
-                params.set('city', name);
+                params.set('city', url);
                 params.delete('search');
                 replace(`/Weather?${params.toString()}`);
             };
