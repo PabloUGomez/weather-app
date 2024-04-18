@@ -1,14 +1,12 @@
-import ResultList from './ui/Weather/resultList'
-import { SideWeather } from './ui/Weather/SideWeather'
-import { Weather } from './ui/Weather/Weather'
-import { getForecast7Days, searchCity } from 'serc/app/api/utils'
+import { SideWeather } from '../ui/Weather/SideWeather'
+import { Weather } from '../ui/Weather/Weather'
+import { getForecast7Days } from 'serc/app/api/utils'
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams?: { city?: string, search?: string }
+  searchParams?: { city?: string }
 }) {
-  let data = []
   let weather = []
   let forecast = []
   if (searchParams?.city) {
@@ -17,9 +15,6 @@ export default async function Page({
   } else {
     weather = await getForecast7Days('London')
     forecast = weather.forecast.forecastday
-  }
-  if (searchParams?.search) {
-    data = await searchCity(searchParams?.search)
   }
 
   return (
@@ -32,7 +27,6 @@ export default async function Page({
         gap: '18px',
       }}
     >
-      <ResultList data={data}/>
       <Weather weather={weather} />
       <SideWeather data={[forecast, 50]} />
     </div>

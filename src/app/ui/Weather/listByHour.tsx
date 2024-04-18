@@ -1,7 +1,8 @@
 import { type hours } from '../../../scripts/placeholder'
 import { useId } from 'react'
 
-export default function ListByHour(hour: hours, index: number,lenght : number) {
+
+export default function ListByHour(hour: hours, index: number, lenght: number) {
   const id = useId()
   return (
     <li key={id} className={`flex gap-y-2 items-center w-full ${index === lenght ? 'justify-start' : 'justify-around'}`}>

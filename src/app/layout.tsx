@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Aside from './ui/Aside/Aside'
+import SearchPage from './ui/Weather/SearchPage'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,22 +19,27 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        {' '}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 12fr',
+            gridTemplateAreas: `'aside search search' 'aside main main'`,
+            gridTemplateColumns: '100px 12fr',
+            gridTemplateRows: '50px 16fr',
             width: '100%',
-            height: '100vh',
+            height: '100%',
             placeItems: 'center',
-            padding: '18px 0',
-            margin: '0',
-            gap: '18px',
+            padding: '10px 18px',
+            gap : '20px'
           }}
           className='text-white'
         >
-          <Aside />
-          {children}
+          <div className='[grid-area:search] w-full'>
+            <SearchPage />
+          </div>
+          <div className='[grid-area:aside] h-full'>
+            <Aside />
+          </div>
+          <div className='[grid-area:main] w-full flex '>{children}</div>
         </div>
       </body>
     </html>

@@ -5,6 +5,7 @@
 
 body{
   background-color: rgb(15 23 42);
-  padding: 0px 18px;
+  padding: 0;
   display: flex;
+  height: 100vh;
 }
