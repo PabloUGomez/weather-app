@@ -1,6 +1,6 @@
 import AirConditionCard from "./airConditionCard"
 
-export default function FullAirCondition(dataAirConditions: any) {
+export default function FullAirCondition({dataAirConditions} : {dataAirConditions: any}) {
   const {
     feelslike_c,
     feelslike_f,
@@ -32,7 +32,6 @@ export default function FullAirCondition(dataAirConditions: any) {
         gridTemplateColumns: '1fr 1fr',
         gridTemplateRows: '1fr 1fr 1fr 1fr',
         width: '100%',
-        height: '100%',
         gap: '18px',
       }}
     >

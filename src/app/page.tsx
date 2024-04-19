@@ -1,12 +1,12 @@
 import ResultList from './ui/Weather/resultList'
-import { SideWeather } from './ui/Weather/SideWeather'
 import { Weather } from './ui/Weather/Weather'
 import { getForecast7Days, searchCity } from 'serc/app/api/utils'
+import SeeMore from './ui/Weather/seeMore'
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams?: { city?: string, search?: string }
+  searchParams?: { city?: string, search?: string, seemore?: string}
 }) {
   let data = []
   let weather = []
@@ -23,18 +23,12 @@ export default async function Page({
   }
 
   return (
-    <div
-      className='flex flex-col lg:grid'
-      style={{
-        gridTemplateColumns: '2fr 1fr',
-        width: '100%',
-        height: '88vh',
-        gap: '18px',
-      }}
+    <main
+      className='w-full h-full'
     >
       <ResultList data={data}/>
-      <Weather weather={weather} />
-      <SideWeather data={[forecast, 50]} />
-    </div>
+      {searchParams?.seemore === 'true' && <SeeMore weather={weather} />}
+      {searchParams?.seemore !== 'true' && <Weather weather={weather} />}
+    </main>
   )
 }

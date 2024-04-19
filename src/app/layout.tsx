@@ -23,12 +23,12 @@ export default function RootLayout({
           style={{
             display: 'grid',
             gridTemplateAreas: `'aside search search' 'aside main main'`,
-            gridTemplateColumns: '100px 12fr',
-            gridTemplateRows: '50px 16fr',
+            gridTemplateColumns: '1fr 12fr',
+            gridTemplateRows: '1fr 16fr',
             width: '100%',
-            height: '100%',
+            height: '95vh',
             placeItems: 'center',
-            padding: '10px 18px',
+            margin: '18px',
             gap : '20px'
           }}
           className='text-white'

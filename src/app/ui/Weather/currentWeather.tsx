@@ -14,7 +14,7 @@ export default function CurrentWeather(mainWeather: {
 
   return (
     <article>
-      <div className='flex flex-row justify-between items-center mx-4 xl:mx-20 lg:mx-10 mb-2 h-full max-h-56'>
+      <div className='flex flex-row justify-between items-center mx-4 xl:mx-20 lg:mx-10 h-full max-h-56 mb-4'>
         <span className='flex flex-col gap-y-10'>
           <span>
             <h2 className='text-6xl font-bold'>

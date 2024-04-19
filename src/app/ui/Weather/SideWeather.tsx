@@ -40,13 +40,13 @@ function listByDay(day: days, id: string, index: number, imageSize: number) {
 export const SideWeather = ({ data }: { data: any }) => {
   const forecast = data[0] as []
   const imageSize = data[1]
-  const id = useId()
+    const id = useId()
   return (
     <div className='bg-gray-800 rounded-2xl flex flex-col p-4 h-full'>
       <h3 className='uppercase font-semibold text-sm text-white/80'>
         7-day forecast
       </h3>
-      <ul className='flex flex-col h-full justify-between'>
+      <ul className='flex flex-col justify-between gap-y-1 h-full'>
         {forecast.map((days, index) => {
           const { day } = days
           const { date } = days as { date: string }
@@ -72,7 +72,7 @@ export const SideWeather = ({ data }: { data: any }) => {
             <li
               key={index}
             >
-              {listByDay(currentDay as days, id, index, imageSize.imageSize)}
+              {listByDay(currentDay as days, id, index, imageSize)}
             </li>
           )
         })}

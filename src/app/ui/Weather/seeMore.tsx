@@ -1,9 +1,9 @@
 import CurrentWeather from './currentWeather'
 import TodayForecast from './todayForecast'
-import AirConditions from './airConditions'
 import { SideWeather } from './SideWeather'
+import FullAirConditions from './fullAirCondition'
 
-export async function Weather({ weather }: { weather: any }) {
+export default function SeeMore({ weather }: { weather: any }) {
   type mainWeather = {
     name: string
     country: string
@@ -58,35 +58,29 @@ export async function Weather({ weather }: { weather: any }) {
     sunset: forecast.forecastday[0].astro.sunset,
     chanceOfRain: forecast.forecastday[0].day.daily_chance_of_rain,
   } as airConditions
+  let hoursSplit = [] as any
+  hours.forEach((hour) => {
+    if (hour === hours[0] || hour === hours[2] || hour === hours[5]) {
+      hoursSplit.push(hour)
+    }
+  })
   return (
-    <>
-      <div
-        className='lg:grid hidden'
-        style={{
-          gridTemplateColumns: '2fr 1fr',
-          width: '100%',
-          height: '100%',
-          alignItems: 'start',
-          gap: '18px',
-        }}
-      >
-        <div>
-          <CurrentWeather {...mainWeather} />
-          <TodayForecast hours={[...hours]} />
-          <AirConditions data={dataAirConditions as airConditions} />
-        </div>
-
-        <SideWeather data={[forecastDay, 70]} />
+    <div
+      className='flex flex-col lg:grid'
+      style={{
+        gridTemplateColumns: '2fr 1fr',
+        gridTemplateRows: '1fr auto',
+        alignItems: 'start',
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      <CurrentWeather {...mainWeather} />
+      <div className='flex items-end h-full'>
+        <TodayForecast hours={[...hours]} />
       </div>
-      <div className=' lg:hidden flex flex-col w-full h-full'>
-        <div className='mb-4'>
-          <CurrentWeather {...mainWeather} />
-          <TodayForecast hours={[...hours]} />
-          <AirConditions data={dataAirConditions as airConditions} />
-        </div>
-
-        <SideWeather data={[forecastDay, 70]} />
-      </div>
-    </>
+      <FullAirConditions dataAirConditions={dataAirConditions} />
+      <SideWeather data={[forecastDay, 45]} />
+    </div>
   )
 }

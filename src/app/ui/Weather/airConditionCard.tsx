@@ -12,7 +12,7 @@ export default function AirConditionCard(
   return (
     <div
       key={index}
-      className='bg-gray-800 rounded-xl flex flex-col pl-4 gap-x-1 justify-center'
+      className='bg-gray-800 rounded-xl flex flex-col pl-4 py-1 h-full gap-x-1 justify-center mt-1 mr-[18px]'
     >
       <span className='flex items-center gap-x-2'>
         {src === 'visibility' ? (
@@ -30,7 +30,7 @@ export default function AirConditionCard(
 
         <h4 className='text-white/70 text-xl'>{text}</h4>
       </span>
-      <h4 className='text-white text-3xl font-bold ml-12'>{value}°</h4>
+      <h4 className='text-white text-2xl font-bold ml-12'>{value}°</h4>
     </div>
   )
 }
