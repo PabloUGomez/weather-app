@@ -59,7 +59,7 @@ export default function SeeMore({ weather }: { weather: any }) {
     chanceOfRain: forecast.forecastday[0].day.daily_chance_of_rain,
   } as airConditions
   let hoursSplit = [] as any
-  hours.forEach((hour) => {
+  hours.forEach((hour : any) => {
     if (hour === hours[0] || hour === hours[2] || hour === hours[5]) {
       hoursSplit.push(hour)
     }

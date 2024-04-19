@@ -16,7 +16,7 @@ export default function SearchPage() {
       if (value) {
         params.set('search', value)
       }
-      replace(`/?${params.toString()}`)
+      replace(`${pathname}?${params.toString()}`)
     },
     400
   )
