@@ -34,7 +34,6 @@ export default function ResultList({
             }
             const params = new URLSearchParams(searchParams)
             params.set('city', url)
-            params.delete('search')
             params.delete('seemore')
             const cities = JSON.parse(localStorage.getItem('cities') || '[]')
             if (cities.length >= 4) {

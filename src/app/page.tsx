@@ -10,13 +10,10 @@ export default async function Page({
 }) {
   let data = []
   let weather = []
-  let forecast = []
   if (searchParams?.city) {
     weather = await getForecast7Days(searchParams?.city)
-    forecast = weather.forecast.forecastday
   } else {
     weather = await getForecast7Days('London')
-    forecast = weather.forecast.forecastday
   }
   if (searchParams?.search) {
     data = await searchCity(searchParams?.search)

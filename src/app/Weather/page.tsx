@@ -8,7 +8,7 @@ import ResultList from '../ui/Weather/resultList'
 export default async function Page({
   searchParams,
 }: {
-  searchParams?: { city?: string; seemore?: string; search?: string}
+  searchParams?: { city?: string; seemore?: string;}
 }) {
   let data = []
   let weather = []
@@ -17,13 +17,8 @@ export default async function Page({
   } else {
     weather = await getForecast7Days('London')
   }
-  if (searchParams?.search) {
-    data = await searchCity(searchParams?.search)
-  }
-  
   return (
     <main className='w-full h-full'>
-      <ResultList data={data} />
       {searchParams?.seemore === 'true' && <SeeMore weather={weather} />}
       {searchParams?.seemore !== 'true' && <Weather weather={weather} />}
     </main>

@@ -1,3 +1,4 @@
+''
 import Link from 'next/link'
 import CitiesIcon from '../icons/cities'
 import SettingsIcon from '../icons/settings'

@@ -1,5 +1,4 @@
 import { useId } from 'react'
-import { forecast7Days } from 'serc/scripts/placeholder'
 
 type days = {
   maxtemp_c: number
@@ -42,7 +41,7 @@ export const SideWeather = ({ data }: { data: any }) => {
   const imageSize = data[1]
     const id = useId()
   return (
-    <div className='bg-gray-800 rounded-2xl flex flex-col p-4 h-full'>
+    <div className='bg-gray-800 rounded-2xl flex flex-col p-4 h-full w-full lg:m-0 my-[18px]'>
       <h3 className='uppercase font-semibold text-sm text-white/80'>
         7-day forecast
       </h3>

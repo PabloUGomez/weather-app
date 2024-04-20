@@ -59,28 +59,47 @@ export default function SeeMore({ weather }: { weather: any }) {
     chanceOfRain: forecast.forecastday[0].day.daily_chance_of_rain,
   } as airConditions
   let hoursSplit = [] as any
-  hours.forEach((hour : any) => {
+  hours.forEach((hour: any) => {
     if (hour === hours[0] || hour === hours[2] || hour === hours[5]) {
       hoursSplit.push(hour)
     }
   })
   return (
-    <div
-      className='flex flex-col lg:grid'
-      style={{
-        gridTemplateColumns: '2fr 1fr',
-        gridTemplateRows: '1fr auto',
-        alignItems: 'start',
-        width: '100%',
-        height: '100%',
-      }}
-    >
-      <CurrentWeather {...mainWeather} />
-      <div className='flex items-end h-full'>
-        <TodayForecast hours={[...hours]} />
+    <>
+      <div
+        className='hidden lg:grid'
+        style={{
+          gridTemplateColumns: '2fr 1fr',
+          gridTemplateRows: '1fr auto',
+          alignItems: 'start',
+          width: '100%',
+          height: '100%',
+        }}
+      >
+        <CurrentWeather {...mainWeather} />
+        <div className='flex items-end h-full'>
+          <TodayForecast hours={[...hours]} />
+        </div>
+        <FullAirConditions dataAirConditions={dataAirConditions} />
+        <SideWeather data={[forecastDay, 45]} />
       </div>
-      <FullAirConditions dataAirConditions={dataAirConditions} />
-      <SideWeather data={[forecastDay, 45]} />
-    </div>
+      <div>
+        <div
+          className='flex flex-col lg:hidden  w-full h-full'
+          style={{
+            gridTemplateColumns: '2fr 1fr',
+            gridTemplateRows: '1fr auto',
+            alignItems: 'start',
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          <CurrentWeather {...mainWeather} />
+          <TodayForecast hours={[...hours]} />
+          <FullAirConditions dataAirConditions={dataAirConditions} />
+          <SideWeather data={[forecastDay, 45]} />
+        </div>
+      </div>
+    </>
   )
 }

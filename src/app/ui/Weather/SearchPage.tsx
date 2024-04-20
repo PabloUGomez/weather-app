@@ -5,9 +5,7 @@ import { ChangeEvent } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 export default function SearchPage() {
-  const input = document.getElementById('search') as HTMLInputElement
   const searchParams = useSearchParams()
-  const pathname = usePathname()
   const { replace } = useRouter()
   const handleSearch = useDebouncedCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,17 +14,10 @@ export default function SearchPage() {
       if (value) {
         params.set('search', value)
       }
-      replace(`${pathname}?${params.toString()}`)
+      replace(`/?${params.toString()}`)
     },
     400
   )
-  if (input) {
-    if (pathname === '/Weather') {
-      if (input.value != '') {
-        input.value = ''
-      }
-    }
-  }
 
   return (
     <form action=''>
