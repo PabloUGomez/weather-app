@@ -27,7 +27,6 @@ export default function RootLayout({
             gridTemplateRows: '1fr 16fr',
             width: '100%',
             height: '95vh',
-            placeItems: 'center',
             margin: '18px',
             gap : '20px'
           }}
