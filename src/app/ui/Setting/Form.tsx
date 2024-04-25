@@ -1,30 +1,17 @@
 'use client'
 
+import { useLocalStorage } from "serc/app/hooks/useLocalStorage"
+
 export default function Form() {
-  if (typeof window === 'undefined') {
-    return null
-  }
-  if (localStorage.getItem('settings') === null) {
-    window.localStorage.setItem(
-      'settings',
-      JSON.stringify({
-        temperature: 'Celsius',
-        wind: 'kmh',
-        pressure: 'mm',
-        precipitation: 'Milimeters',
-        distance: 'Kilometers',
-      })
-    )
-  }
-  let settings = JSON.parse(
-    window.localStorage.getItem('settings') || '{}'
-  ) as {
-    temperature: string
-    wind: string
-    pressure: string
-    precipitation: string
-    distance: string
-  }
+
+  const [settings, setSettings] = useLocalStorage('settings', {
+    temperature: 'Celsius',
+    wind: 'kmh',
+    pressure: 'mm',
+    precipitation: 'Milimeters',
+    distance: 'Kilometers',
+  })
+  console.log(settings);
 
   function handleTemperature(e: React.MouseEvent<HTMLButtonElement>) {
     const fahrenheit = document.querySelector('#Fahrenheit')
@@ -37,7 +24,7 @@ export default function Form() {
       fahrenheit?.classList.remove('bg-gray-700')
     }
     settings.temperature = e.currentTarget.id
-    localStorage.setItem('settings', JSON.stringify(settings))
+    setSettings(settings)
   }
 
   function handleWind(e: React.MouseEvent<HTMLButtonElement>) {
@@ -60,6 +47,7 @@ export default function Form() {
     settings.wind = e.currentTarget.id
     localStorage.setItem('settings', JSON.stringify(settings))
   }
+  console.log(settings.temperature);
 
   function handlePressure(e: React.MouseEvent<HTMLButtonElement>) {
     const hpa = document.querySelector('#hpa')

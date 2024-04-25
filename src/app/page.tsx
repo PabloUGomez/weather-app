@@ -2,16 +2,16 @@ import ResultList from './ui/Weather/resultList'
 import { Weather } from './ui/Weather/Weather'
 import { getForecast7Days, searchCity } from 'serc/app/api/utils'
 import SeeMore from './ui/Weather/seeMore'
-import { getStorage } from './ui/getStorage'
 
 export default async function Page({
   searchParams,
 }: {
   searchParams?: { city?: string, search?: string, seemore?: string}
 }) {
+
   let data = []
   let weather = {} as any
-  const { cities, settings } = getStorage()
+
   if (searchParams?.city) {
     weather = await getForecast7Days(searchParams?.city)
   } else {
