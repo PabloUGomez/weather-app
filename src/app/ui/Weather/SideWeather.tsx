@@ -1,16 +1,14 @@
 import { useId } from 'react'
 
 type days = {
-  maxtemp_c: number
-  maxtemp_f: number
-  mintemp_c: number
-  mintemp_f: number
+  maxtemp: string
+  mintemp: string
   condition: string
   img: string
   date: string
 }
 function listByDay(day: days, id: string, index: number, imageSize: number) {
-  const { maxtemp_c, maxtemp_f, mintemp_c, mintemp_f, condition, img, date } =
+  const { maxtemp, mintemp, condition, img, date } =
     day
   const nameOfDay = new Date(date).toLocaleDateString('en-US', {
     weekday: 'short',
@@ -29,7 +27,7 @@ function listByDay(day: days, id: string, index: number, imageSize: number) {
           <h5 className='text-xs font-light text-pretty w-16'>{condition}</h5>
         </picture>
         <h4 className='w-24 text-right'>
-          {maxtemp_c}°/{mintemp_c}°
+          {maxtemp}/{mintemp}
         </h4>
       </span>
     </div>
@@ -49,22 +47,19 @@ export const SideWeather = ({ data }: { data: any }) => {
         {forecast.map((days, index) => {
           const { day } = days
           const { date } = days as { date: string }
-          const { maxtemp_c, maxtemp_f, mintemp_c, mintemp_f, condition } =
+          const { maxtemp,mintemp, condition, img } =
             day as {
-              maxtemp_c: number
-              maxtemp_f: number
-              mintemp_c: number
-              mintemp_f: number
-              condition: { icon: string; text: string }
+              maxtemp: string
+              mintemp: string
+              condition: string
+              img : string
             }
-          const { icon, text } = condition as { icon: string; text: string }
+      
           const currentDay = {
-            maxtemp_c: maxtemp_c,
-            maxtemp_f: maxtemp_f,
-            mintemp_c: mintemp_c,
-            mintemp_f: mintemp_f,
-            condition: text,
-            img: icon.split('/').slice(-1)[0].split('.')[0],
+            maxtemp,
+            mintemp,
+            condition,
+            img,
             date: date,
           } as days
           return (

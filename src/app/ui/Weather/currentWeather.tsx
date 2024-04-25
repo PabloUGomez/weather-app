@@ -3,12 +3,12 @@ export default function CurrentWeather(mainWeather: {
   name: string
   country: string
   condition: string 
-  temp_c: number
+  temp: number
   isDay: string
   icon: string
 }) {
 
-  const { name, country, condition, temp_c, isDay, icon } = mainWeather
+  const { name, country, condition, temp, isDay, icon } = mainWeather
 
   
 
@@ -25,7 +25,7 @@ export default function CurrentWeather(mainWeather: {
             </h2>
             <p className='mt-2 text-white/50'>{condition}</p>
           </span>
-          <h2 className='text-6xl font-bold'>{temp_c}°</h2>
+          <h2 className='text-6xl font-bold'>{temp}</h2>
         </span>
         <picture>
           <img

@@ -1,6 +1,9 @@
 'use client'
 
 export default function Form() {
+  if (typeof window === 'undefined') {
+    return null
+  }
   if (localStorage.getItem('settings') === null) {
     window.localStorage.setItem(
       'settings',

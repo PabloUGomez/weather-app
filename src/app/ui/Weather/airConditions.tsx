@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 export default function AirConditions({
   data,
 }: {
-  data: { feelslike_c: number; wind_kph: number; humidity: number; uv: number }
+  data: { feelslike: string; wind: string; humidity: number; uv: number }
 }) {
   const searchParams = useSearchParams()
   const pathname = usePathname()
@@ -15,7 +15,7 @@ export default function AirConditions({
     params.set('seemore', 'true')
     replace(`${pathname}?${params.toString()}`)
   }
-  const { feelslike_c, wind_kph, humidity, uv } = data
+  const { feelslike, wind, humidity, uv } = data
 
   return (
     <article className='bg-gray-800 w-full rounded-2xl p-2 md:p-4 flex flex-col'>
@@ -43,7 +43,7 @@ export default function AirConditions({
           </picture>
           <span className='mt-1'>
             <h4 className='text-white/70 text-xl'>Feels like</h4>
-            <h4 className='text-white text-3xl font-bold'>{feelslike_c}°</h4>
+            <h4 className='text-white text-3xl font-bold'>{feelslike}</h4>
           </span>
         </span>
         <span className='flex flex-row gap-x-1'>
@@ -57,7 +57,7 @@ export default function AirConditions({
           </picture>
           <span className='mt-1'>
             <h4 className='text-white/70 text-xl'>Wind</h4>
-            <h4 className='text-white text-3xl font-bold'>{wind_kph} km/h</h4>
+            <h4 className='text-white text-3xl font-bold'>{wind}</h4>
           </span>
         </span>
         <span className='flex flex-row gap-x-1'>
